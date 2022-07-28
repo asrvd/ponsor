@@ -3,25 +3,19 @@ import { useState, useRef, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FiHome, FiLogOut } from "react-icons/fi"
+import { FiHome, FiLogOut } from "react-icons/fi";
+import { memo } from "react";
 
 interface HeaderProps {
   name: string | any;
   image: string | any;
 }
 
-export default function Header(props: HeaderProps) {
+export default memo(function Header(props: HeaderProps) {
   const router = useRouter();
   const ref = useRef<any>();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  const dropdownAnimation = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-    },
-  };
+
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current?.contains(event.target)) {
@@ -33,6 +27,7 @@ export default function Header(props: HeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [drawerOpen]);
+  
   return (
     <div
       className="flex justify-between items-center p-3 w-full h-full text-gray-200"
@@ -40,13 +35,12 @@ export default function Header(props: HeaderProps) {
     >
       <h2>ponsor</h2>
       <div
-        className="relative flex flex-col justify-center items-center gap-3  cursor-pointer"
-        onClick={() => {
-          console.log(drawerOpen);
+        className="relative flex flex-col justify-center items-center gap-3 cursor-pointer"
+        onClick={() => {   
           setDrawerOpen(!drawerOpen);
         }}
       >
-        <div className="flex gap-3 w-full h-full justify-center items-center duration-500 hover:bg-gray-600 px-2 py-1 rounded">
+        <div className="flex gap-3 w-full h-full justify-center items-center duration-500 hover:bg-gray-800 px-2 py-1 rounded">
           <img
             src={props?.image}
             alt={props?.name}
@@ -63,18 +57,18 @@ export default function Header(props: HeaderProps) {
             }}
             transition={{ duration: 0.5 }}
             // variants={dropdownAnimation}
-            className="absolute right-0 -bottom-[5.5rem] mt-2 py-1 bg-gray-600 w-full flex flex-col justify-center items-center shadow-xl rounded"
+            className="absolute right-0 -bottom-[5.5rem] mt-2 py-1 bg-gray-800 w-full flex flex-col justify-center items-center shadow-xl rounded"
           >
             <button
               onClick={() => signOut()}
-              className="flex justify-start pl-2 gap-3 items-center text-sm w-full py-2 hover:bg-gray-700 duration-500"
+              className="flex justify-start pl-2 gap-3 items-center text-sm w-full py-2 hover:bg-gray-700 duration-300"
             >
               <FiLogOut />
               Sign out
             </button>
             <button
               onClick={() => router.push("/")}
-              className="flex justify-start gap-3 pl-2 items-center text-sm w-full py-2 hover:bg-gray-700"
+              className="flex justify-start duration-300 gap-3 pl-2 items-center text-sm w-full py-2 hover:bg-gray-700"
             >
               <FiHome />
               Home
@@ -84,4 +78,4 @@ export default function Header(props: HeaderProps) {
       </div>
     </div>
   );
-}
+})
