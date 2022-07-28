@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         sans: ["Work Sans", "sans-serif"],
       },
+      screens: {
+        "xs": "425px",
+      }
     },
   },
   plugins: [],

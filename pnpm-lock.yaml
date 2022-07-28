@@ -4,6 +4,7 @@ specifiers:
   '@next-auth/prisma-adapter': ^1.0.3
   '@prisma/client': ^4.0.0
   '@types/node': 18.0.3
+  '@types/nprogress': ^0.2.0
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   autoprefixer: ^10.4.7
@@ -21,9 +22,9 @@ specifiers:
   react-hook-form: ^7.33.1
   react-hot-toast: ^2.2.0
   react-icons: ^4.4.0
-  rollup: ^2.75.7
   tailwindcss: ^3.1.4
   typescript: 4.7.4
+  uglify-js: ^3.16.3
 
 dependencies:
   '@next-auth/prisma-adapter': 1.0.3_zbk22odcg35vk5ct4chga7myiy
@@ -38,10 +39,11 @@ dependencies:
   react-hook-form: 7.33.1_react@18.2.0
   react-hot-toast: 2.2.0_biqbaboplfbrettd7655fr4n2y
   react-icons: 4.4.0_react@18.2.0
-  rollup: 2.75.7
+  uglify-js: 3.16.3
 
 devDependencies:
   '@types/node': 18.0.3
+  '@types/nprogress': 0.2.0
   '@types/react': 18.0.15
   '@types/react-dom': 18.0.6
   autoprefixer: 10.4.7_postcss@8.4.14
@@ -360,6 +362,10 @@ packages:
 
   /@types/node/18.0.3:
     resolution: {integrity: sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==}
+    dev: true
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -1277,6 +1283,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
+    dev: true
     optional: true
 
   /function-bind/1.1.1:
@@ -2212,14 +2219,6 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup/2.75.7:
-    resolution: {integrity: sha512-VSE1iy0eaAYNCxEXaleThdFXqZJ42qDBatAwrfnPlENEZ8erQ+0LYX4JXOLPceWfZpV1VtZwZ3dFCuOZiSyFtQ==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: false
-
   /run-parallel/1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
@@ -2441,6 +2440,12 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
+
+  /uglify-js/3.16.3:
+    resolution: {integrity: sha512-uVbFqx9vvLhQg0iBaau9Z75AxWJ8tqM9AV890dIZCLApF4rTcyHwmAvLeEdYRs+BzYWu8Iw81F79ah0EfTXbaw==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    dev: false
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}

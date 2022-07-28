@@ -14,6 +14,7 @@ import axios from "axios";
 import { PrismaClient } from "@prisma/client";
 import type { Widget, Link } from "@prisma/client";
 import { getIcon } from "../lib/getIcon";
+import toast from "react-hot-toast";
 
 const prisma = new PrismaClient();
 
@@ -93,6 +94,8 @@ export default function Dashboard(props: DashboardProps) {
       imageURL = await uploadImage();
     }
 
+    let toastId = toast.loading("Saving...");
+
     const res = await axios.post("/api/widget", {
       name: session?.user.name,
       heading: formData.heading,
@@ -106,9 +109,19 @@ export default function Dashboard(props: DashboardProps) {
       }),
     });
 
-    console.log(res.data);
+    if (res.status === 200) {
+      toast.success("Saved!", {
+        id: toastId,
+      });
 
-    location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000)
+    } else {
+      toast.error("Error saving! Try Again!", {
+        id: toastId,
+      });
+    }
   };
 
   const uploadImage = async () => {

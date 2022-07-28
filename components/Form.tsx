@@ -79,6 +79,7 @@ type Slug =
   | "paypal";
 
 export default memo(function PonsorForm({ ...props }: FormProps) {
+  const [hasMadeChanges, setHasMadeChanges] = useState(false);
   const [addedLinkTypes, setAddedLinkTypes] = useState<string[]>(
     props?.links?.map((link) => link.title) || []
   );
@@ -143,7 +144,11 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
             <input
               type="file"
               className="file:rounded file:outline-none file:border-none file:cursor-pointer file:shadow-md file:hover:shadow-xl file:bg-gray-800 duration-500 text-gray-300 file:text-gray-300 file:p-2"
-              onChange={props.uploadImage}
+              onChange={(e: any) => {
+                e.preventDefault();
+                setHasMadeChanges(true);
+                props.uploadImage(e);
+              }}
             ></input>
           </div>
           <div className="flex flex-col gap-1">
@@ -156,6 +161,9 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
               placeholder={props?.widget?.heading}
               onChange={(e) => {
                 e.preventDefault();
+                if (e.target.value !== props?.widget?.heading) {
+                  setHasMadeChanges(true);
+                }
                 props.setHeading(e.target.value);
               }}
             ></input>
@@ -198,6 +206,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                     toast.error("Please add atleast one link");
                   }
                 }}
+                disabled={!hasMadeChanges}
               >
                 <FiSave />
                 Save Widget
@@ -246,6 +255,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                       )?.icon,
                       type: currentLinkType.split(" ").join("").toLowerCase(),
                     });
+                    setHasMadeChanges(true);
                   } else {
                     toast.error("Link already added!");
                   }
@@ -280,6 +290,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                     addedLinkTypes.filter((l) => l !== link.title)
                   );
                   props.removeLink(link.title);
+                  setHasMadeChanges(true);
                 }}
               >
                 <FiX />

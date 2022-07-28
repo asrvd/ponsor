@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build-script && npm run build-app",
+    "build-app": "next build",
+    "build-script": "uglifyjs ./scripts/embed.js --output ./public/scripts/embed.min.js",
     "start": "next start",
     "lint": "next lint"
   },
@@ -21,10 +23,11 @@
     "react-hook-form": "^7.33.1",
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.4.0",
-    "rollup": "^2.75.7"
+    "uglify-js": "^3.16.3"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.7",

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FiHome, FiLogOut } from "react-icons/fi";
+import { FiHome, FiLogOut, FiSliders } from "react-icons/fi";
 import { memo } from "react";
 
 interface HeaderProps {
@@ -15,6 +15,7 @@ export default memo(function Header(props: HeaderProps) {
   const router = useRouter();
   const ref = useRef<any>();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const currentLocation = router.pathname;
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -67,11 +68,11 @@ export default memo(function Header(props: HeaderProps) {
               Sign out
             </button>
             <button
-              onClick={() => router.push("/")}
+              onClick={() => router.push((currentLocation === "/" ? "/dashboard" : "/"))}
               className="flex justify-start duration-300 gap-3 pl-2 items-center text-sm w-full py-2 hover:bg-gray-700"
             >
-              <FiHome />
-              Home
+              {currentLocation === "/" ? <FiSliders /> : <FiHome />}
+              {currentLocation === "/" ? "Dashboard" : "Home"}
             </button>
           </motion.div>
         )}
