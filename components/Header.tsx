@@ -34,7 +34,9 @@ export default memo(function Header(props: HeaderProps) {
       className="flex justify-between items-center p-3 w-full h-full text-gray-200"
       ref={ref}
     >
-      <h2>ponsor</h2>
+      <h2 className="cursor-pointer" onClick={() => router.push("/")}>
+        ponsor
+      </h2>
       <div
         className="relative flex flex-col justify-center items-center gap-3 cursor-pointer"
         onClick={() => {
