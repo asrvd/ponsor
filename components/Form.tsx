@@ -284,6 +284,8 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
               <a
                 className="flex justify-left items-center p-2 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-700 w-full gap-4"
                 href={link?.url}
+                target={'_blank'}
+                rel="noreferrer"
               >
                 {link?.icon()}
                 {link?.title}

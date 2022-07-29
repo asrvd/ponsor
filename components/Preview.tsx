@@ -1,12 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  SiGithub,
-  SiBuymeacoffee,
-  SiKofi,
-  SiPatreon,
-  SiOpencollective,
-  SiGithubsponsors,
-} from "react-icons/si";
 import { memo } from "react";
 
 export default memo(function Preview(props: any) {
@@ -22,9 +14,7 @@ export default memo(function Preview(props: any) {
           <h2 className="text-lg text-gray-800 font-bold">
             Sponsor {props.name}
           </h2>
-          <h2 className="text-xs text-center text-gray-700">
-            {props.heading}
-          </h2>
+          <h2 className="text-xs text-center text-gray-700">{props.heading}</h2>
         </div>
         <div className="grid grid-cols-1 w-full pt-6 gap-2">
           {props?.links?.map((link: any) => (
@@ -32,7 +22,12 @@ export default memo(function Preview(props: any) {
               key={link?.title}
               className="flex justify-center items-center p-2 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-800"
             >
-              <a className="w-full h-full text-center flex justify-start items-center gap-4" href={link?.url}>
+              <a
+                className="w-full h-full text-center flex justify-start items-center gap-4"
+                href={link?.url}
+                target={"_blank"}
+                rel="noreferrer"
+              >
                 {link?.icon()}
                 {link?.title}
               </a>
@@ -40,7 +35,7 @@ export default memo(function Preview(props: any) {
           ))}
         </div>
         <div className="grid grid-cols-1 w-full pt-6 gap-2 text-center">
-        <h2 className="text-xs text-gray-700">
+          <h2 className="text-xs text-gray-700">
             made with {`<3`} using{" "}
             <a
               className="text-rose-700"
@@ -55,4 +50,4 @@ export default memo(function Preview(props: any) {
       </div>
     </div>
   );
-})
+});

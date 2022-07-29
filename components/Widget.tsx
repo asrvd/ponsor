@@ -27,6 +27,8 @@ export default function WidgetComponent(props: any) {
               <a
                 className="w-full h-full text-center flex justify-start items-center gap-4"
                 href={link?.url}
+                target={'_blank'}
+                rel="noreferrer"
               >
                 {/**@ts-ignore**/}
                 {getIcon(link?.type)()}
