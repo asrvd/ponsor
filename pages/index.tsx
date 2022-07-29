@@ -15,15 +15,15 @@ const Home: NextPage = () => {
   const router = useRouter();
   if (session?.user) {
     return (
-      <div className="relative min-h-screen min-w-screen items-center flex flex-col bg-gray-900">
+      <div className="relative min-h-screen overflow-x-hidden items-center flex flex-col bg-gray-900 p-4">
         <div className="w-full lg:w-2/3">
           <Header name={session?.user?.name} image={session?.user?.image} />
         </div>
-        <div className="w-full lg:w-1/3 py-[8rem] pt-[11rem] flex flex-col text-center justify-center items-center">
-          <h2 className="font-extrabold text-[6rem] text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-cyan-400 shaodw-2xl">
+        <div className="w-[95%] lg:w-1/3 py-[8rem] pt-[11rem] flex flex-col text-center justify-center items-center">
+          <h2 className="font-extrabold text-[4rem] lg:text-[6rem] md:text-[6rem] text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-cyan-400 shaodw-2xl">
             ponsor
           </h2>
-          <p className="text-transparent bg-clip-text font-semibold bg-gradient-to-r from-rose-500 to-cyan-400 text-lg">
+          <p className="text-transparent bg-clip-text font-semibold bg-gradient-to-r from-rose-500 to-cyan-400 text-sm lg:text-lg md:text-lg">
             use widgets in your websites to let people find a way to support
             your work!
           </p>
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
           <iframe
             className="self-center"
             height="100%"
-            src="http://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
+            src="https://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
           ></iframe>
         </div>
         <Features showButton={true} />
@@ -55,12 +55,12 @@ const Home: NextPage = () => {
     );
   }
   return (
-    <div className="relative min-h-screen min-w-screen items-center flex flex-col bg-gray-900">
-      <div className="w-full lg:w-1/3 py-[8rem] pt-[11rem] flex flex-col text-center justify-center items-center">
-        <h2 className="font-extrabold text-[6rem] text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-cyan-400 shaodw-2xl">
+    <div className="relative overflow-x-hidden min-h-screen items-center flex flex-col bg-gray-900 p-4">
+      <div className="w-[95%] lg:w-1/3 py-[8rem] pt-[11rem] flex flex-col text-center justify-center items-center">
+        <h2 className="font-extrabold text-[4rem] lg:text-[6rem] md:text-[6rem] text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-cyan-400 shaodw-2xl">
           ponsor
         </h2>
-        <p className="text-transparent bg-clip-text font-semibold bg-gradient-to-r from-rose-500 to-cyan-400 text-lg">
+        <p className="text-transparent bg-clip-text font-semibold bg-gradient-to-r from-rose-500 to-cyan-400 text-sm lg:text-lg md:text-lg">
           use widgets in your websites to let people find a way to support your
           work!
         </p>
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
         <iframe
           className="self-center"
           height="100%"
-          src="http://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
+          src="https://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
         ></iframe>
       </div>
       <Features showButton={false} />
