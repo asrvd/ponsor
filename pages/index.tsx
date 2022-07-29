@@ -41,7 +41,7 @@ const Home: NextPage = () => {
           <iframe
             className="self-center"
             height="100%"
-            src="http://localhost:3000/widget/panel/cl5s4kjb30010zwufuqoskws9"
+            src="http://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
           ></iframe>
         </div>
         <Features showButton={true} />
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
         <iframe
           className="self-center"
           height="100%"
-          src="http://localhost:3000/widget/panel/cl5s4kjb30010zwufuqoskws9"
+          src="http://ponsor.vercel.app/widget/panel/cl5s4kjb30010zwufuqoskws9"
         ></iframe>
       </div>
       <Features showButton={false} />
