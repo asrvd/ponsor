@@ -11,18 +11,18 @@ import { memo } from "react";
 
 export default memo(function Preview(props: any) {
   return (
-    <div className="flex flex-col justfy-center items-center w-full max-h-max p-3 bg-gray-800 rounded shaodw-xl">
-      <div className="w-[65%] bg-gray-700 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 gap-6">
+    <div className="flex flex-col justify-center items-center w-full lg:w-[35%] max-h-max p-3">
+      <div className="w-[90%] lg:w-full md:w-[45%] bg-gray-200 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 lg:py-[3.8rem] gap-6">
         <div className="flex flex-col justify-center items-center w-full">
           <img
             alt="avatar"
             src={props.uploadedAv ? props.uploadedAv : props.av}
-            className="rounded-full w-20 h-20"
+            className="rounded-full w-20 h-20 shadow-md border-2 border-gray-300"
           ></img>
-          <h2 className="text-lg text-gray-200 font-bold">
+          <h2 className="text-lg text-gray-800 font-bold">
             sponsor {props.name}
           </h2>
-          <h2 className="text-xs text-center text-gray-200">
+          <h2 className="text-xs text-center text-gray-700">
             {props.heading}
           </h2>
         </div>
@@ -40,8 +40,16 @@ export default memo(function Preview(props: any) {
           ))}
         </div>
         <div className="grid grid-cols-1 w-full pt-6 gap-2 text-center">
-          <h2 className="text-xs text-gray-200">
-            made with {`<3`} using ponsor
+        <h2 className="text-xs text-gray-700">
+            made with {`<3`} using{" "}
+            <a
+              className="text-rose-700"
+              href="https://ponsor.vercel.app"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              ponsor
+            </a>
           </h2>
         </div>
       </div>

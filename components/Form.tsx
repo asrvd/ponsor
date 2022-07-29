@@ -1,4 +1,3 @@
-import { useForm, SubmitHandler } from "react-hook-form";
 import {
   SiPatreon,
   SiGithubsponsors,
@@ -8,7 +7,14 @@ import {
   SiLiberapay,
   SiPaypal,
 } from "react-icons/si";
-import { FiLink, FiPlus, FiDelete, FiX, FiSave } from "react-icons/fi";
+import {
+  FiPlus,
+  FiX,
+  FiSave,
+  FiChevronDown,
+  FiCopy,
+  FiCheck,
+} from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { isURL } from "../lib/isURL";
 import toast from "react-hot-toast";
@@ -80,6 +86,7 @@ type Slug =
 
 export default memo(function PonsorForm({ ...props }: FormProps) {
   const [hasMadeChanges, setHasMadeChanges] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [addedLinkTypes, setAddedLinkTypes] = useState<string[]>(
     props?.links?.map((link) => link.title) || []
   );
@@ -95,47 +102,10 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
   );
   const [currentLinkType, setCurrentLinkType] = useState<string>("");
   const [currentLink, setCurrentLink] = useState<string>("");
-  const [links, setLinks] = useState([
-    {
-      name: "GitHub Sponsor",
-      icon: <SiGithubsponsors />,
-      selected: false,
-    },
-    {
-      name: "Buy me a coffee",
-      icon: <SiBuymeacoffee />,
-      selected: false,
-    },
-    {
-      name: "Kofi",
-      icon: <SiKofi />,
-      selected: false,
-    },
-    {
-      name: "Patreon",
-      icon: <SiPatreon />,
-      selected: false,
-    },
-    {
-      name: "Open Collective",
-      icon: <SiOpencollective />,
-      selected: false,
-    },
-    {
-      name: "Liberapay",
-      icon: <SiLiberapay />,
-      selected: false,
-    },
-    {
-      name: "PayPal",
-      icon: <SiPaypal />,
-      selected: false,
-    },
-  ]);
 
   return (
-    <div className="relative flex flex-col justify-center items-center w-full max-h-max p-3 bg-gray-800 rounded shaodw-xl">
-      <div className="w-[80%] bg-gray-700 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 gap-6">
+    <div className="relative flex flex-col justify-center items-center w-full lg:w-[60%] max-h-max p-3">
+      <div className="w-[90%] lg:w-full md:w-[75%] bg-gray-800 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 gap-6">
         <form className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">
             <label htmlFor="file" className="text-gray-200 text-xs">
@@ -143,7 +113,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
             </label>
             <input
               type="file"
-              className="file:rounded file:outline-none file:border-none file:cursor-pointer file:shadow-md file:hover:shadow-xl file:bg-gray-800 duration-500 text-gray-300 file:text-gray-300 file:p-2"
+              className="file:rounded file:outline-none file:border-none file:cursor-pointer file:shadow-md file:hover:shadow-xl file:bg-gray-700 duration-500 text-gray-300 file:text-gray-300 file:p-2"
               onChange={(e: any) => {
                 e.preventDefault();
                 setHasMadeChanges(true);
@@ -174,7 +144,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
             </label>
             <div className="flex gap-1">
               <select
-                className="outline-none w-[60%] text-sm lg:text-base md:text-base focus:outline-none rounded bg-gray-700 text-gray-300 text-md border-2 border-gray-500 p-1"
+                className="outline-none w-[60%] lg:w-[90%] text-sm lg:text-base md:text-base focus:outline-none rounded bg-gray-700 text-gray-300 text-md border-2 border-gray-500 p-1"
                 onChange={(e) => {
                   e.preventDefault();
                   setCurrentLinkType(e.target.value);
@@ -182,9 +152,9 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                 defaultValue=""
               >
                 <option hidden value="">
-                  select a link type..
+                  Select a link type..
                 </option>
-                {links.map((link) => (
+                {sponsorLinks.map((link) => (
                   <option
                     key={link.name}
                     value={link.name}
@@ -265,6 +235,44 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
               </button>
             </div>
           </div>
+          <details className="group w-full">
+            <summary className="flex items-center justify-between p-2 rounded cursor-pointer bg-gray-700">
+              <h5 className="text-gray-300 text-sm md:text-base lg:text-base">
+                Show Embed Code{" "}
+                <span className="text-[0.4rem] lg:text-[0.5rem] md:text-[0.5rem">
+                  {" "}
+                  make sure you have saved your widget!
+                </span>
+              </h5>
+              <FiChevronDown className="flex-shrink-0 ml-1.5 w-5 h-5 transition duration-300 group-open:-rotate-180 text-gray-300" />
+            </summary>
+            <pre className="relative px-2 text-[0.55rem] lg:text-sm md:text-xs w-full mt-4 leading-relaxed text-gray-200">
+              {`<script 
+ src="https://ponsor.vercel.app/scripts/embed.min.js" 
+ async 
+ defer 
+ data-widget-id=${props?.widget?.userId} 
+></script>`}
+              <button
+                className="absolute top-0 right-2 p-2 bg-gray-700 rounded-lg hover:bg-gray-600 duration-300 shadow-xl"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  navigator.clipboard.writeText(`<script 
+  src="https://ponsor.vercel.app/scripts/embed.min.js" 
+  async 
+  defer 
+  data-widget-id=${props?.widget?.userId} 
+></script>`);
+                  setCopied(true);
+                  setTimeout(() => {
+                    setCopied(false);
+                  }, 1000);
+                }}
+              >
+                {copied === false ? <FiCopy /> : <FiCheck />}
+              </button>
+            </pre>
+          </details>
         </form>
         <div className="grid grid-cols-1 w-full pt-6 gap-2">
           {addedLinks.map((link) => (
@@ -273,14 +281,14 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
               key={link?.url + link?.title}
             >
               <a
-                className="flex justify-left items-center p-2 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-800 w-full gap-4"
+                className="flex justify-left items-center p-2 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-700 w-full gap-4"
                 href={link?.url}
               >
                 {link?.icon()}
                 {link?.title}
               </a>
               <button
-                className="p-1 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-800 h-full px-[0.65rem]"
+                className="p-1 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-700 h-full px-[0.65rem]"
                 onClick={(e: any) => {
                   e.preventDefault();
                   setAddedLinks(

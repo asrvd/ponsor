@@ -28,7 +28,7 @@ export default memo(function Header(props: HeaderProps) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [drawerOpen]);
-  
+
   return (
     <div
       className="flex justify-between items-center p-3 w-full h-full text-gray-200"
@@ -37,7 +37,7 @@ export default memo(function Header(props: HeaderProps) {
       <h2>ponsor</h2>
       <div
         className="relative flex flex-col justify-center items-center gap-3 cursor-pointer"
-        onClick={() => {   
+        onClick={() => {
           setDrawerOpen(!drawerOpen);
         }}
       >
@@ -68,7 +68,9 @@ export default memo(function Header(props: HeaderProps) {
               Sign out
             </button>
             <button
-              onClick={() => router.push((currentLocation === "/" ? "/dashboard" : "/"))}
+              onClick={() =>
+                router.push(currentLocation === "/" ? "/dashboard" : "/")
+              }
               className="flex justify-start duration-300 gap-3 pl-2 items-center text-sm w-full py-2 hover:bg-gray-700"
             >
               {currentLocation === "/" ? <FiSliders /> : <FiHome />}
@@ -79,4 +81,4 @@ export default memo(function Header(props: HeaderProps) {
       </div>
     </div>
   );
-})
+});

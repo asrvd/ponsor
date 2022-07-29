@@ -5,6 +5,8 @@ import { Toaster } from "react-hot-toast";
 import NProgress from "nprogress";
 import { Router } from "next/router";
 import "../styles/nprogress.css";
+import Head from "next/head";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   NProgress.configure({ showSpinner: false });

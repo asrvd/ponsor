@@ -1,9 +1,4 @@
-import {
-  useSession,
-  signIn,
-  signOut,
-  getSession,
-} from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import { GetServerSideProps } from "next";
 import Header from "../components/Header";
@@ -15,6 +10,7 @@ import { PrismaClient } from "@prisma/client";
 import type { Widget, Link } from "@prisma/client";
 import { getIcon } from "../lib/getIcon";
 import toast from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const prisma = new PrismaClient();
 
@@ -66,27 +62,6 @@ export default function Dashboard(props: DashboardProps) {
       : [],
   });
 
-  // async function test() {
-  //   const res = await axios.post("/api/widget", {
-  //     name: "ashish",
-  //     heading: "loved the project? help me create more!",
-  //     avatar: session?.user.image,
-  //     links: [
-  //       {
-  //         url: "https://www.patreon.com/ashish",
-  //         title: "Patreon",
-  //         type: "patreon",
-  //       },
-  //       {
-  //         url: "https://kofi.com/ashish",
-  //         title: "Kofi",
-  //         type: "kofi",
-  //       },
-  //     ],
-  //   });
-  //   console.log(res.data);
-  // }
-
   let imageURL: string | null = null;
 
   const handleSave = async () => {
@@ -116,7 +91,7 @@ export default function Dashboard(props: DashboardProps) {
 
       setTimeout(() => {
         window.location.reload();
-      }, 1000)
+      }, 1000);
     } else {
       toast.error("Error saving! Try Again!", {
         id: toastId,
@@ -147,68 +122,71 @@ export default function Dashboard(props: DashboardProps) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-w-screen w-screen min-h-screen bg-gray-900 px-3 overflow-x-hidden">
+    <div className="relative gap-4 pb-20 flex flex-col justify-center items-center min-w-screen min-h-screen bg-gray-900 px-3 overflow-x-hidden">
       {session?.user ? (
-        <div className="flex flex-col min-h-screen w-full gap-3">
+        <div className="flex flex-col min-h-screen lg:w-2/3 w-full gap-3">
           <div className="w-full max-h-[10%]">
             <Header image={session?.user.image} name={session?.user.name} />
           </div>
+          <div className="flex w-full h-full gap-2 items-center justify-center flex-col md:flex-col lg:flex-row p-0 lg:py-20 lg:px-10">
+            <Preview
+              av={
+                props?.widget?.avatar
+                  ? props?.widget?.avatar
+                  : session?.user.image
+              }
+              name={
+                props?.widget?.name ? props?.widget?.name : session?.user.name
+              }
+              uploadedAv={formData.previewImage}
+              links={formData.links}
+              heading={formData.heading}
+            />
 
-          <Preview
-            av={
-              props?.widget?.avatar
-                ? props?.widget?.avatar
-                : session?.user.image
-            }
-            name={
-              props?.widget?.name ? props?.widget?.name : session?.user.name
-            }
-            uploadedAv={formData.previewImage}
-            links={formData.links}
-            heading={formData.heading}
-          />
-          <PonsorForm
-            widget={props?.widget}
-            links={props?.links?.map((link) => {
-              return {
-                url: link.url,
-                title: link.title,
-                type: link.type,
-                icon: getIcon(link.type as Slug),
-              };
-            })}
-            uploadImage={(e: any) => {
-              e.preventDefault();
-              setFormData({
-                ...formData,
-                previewImage: URL.createObjectURL(e.target.files[0]),
-                rawImage: e.target.files[0],
-              });
-            }}
-            addLink={(link: any) =>
-              setFormData({ ...formData, links: [...formData.links, link] })
-            }
-            removeLink={(linkName: string) => {
-              setFormData({
-                ...formData,
-                links: formData.links.filter(
-                  (link: any) => link.title !== linkName // here
-                ),
-              });
-            }}
-            setHeading={(head: string) => {
-              setFormData({ ...formData, heading: head });
-            }}
-            // handleImageUpload={(e: any) => {
-            //   e.preventDefault();
-            //   handleUpload(e);
-            // }}
-            handleSave={handleSave}
-          />
+            <PonsorForm
+              widget={props?.widget}
+              links={props?.links?.map((link) => {
+                return {
+                  url: link.url,
+                  title: link.title,
+                  type: link.type,
+                  icon: getIcon(link.type as Slug),
+                };
+              })}
+              uploadImage={(e: any) => {
+                e.preventDefault();
+                setFormData({
+                  ...formData,
+                  previewImage: URL.createObjectURL(e.target.files[0]),
+                  rawImage: e.target.files[0],
+                });
+              }}
+              addLink={(link: any) =>
+                setFormData({ ...formData, links: [...formData.links, link] })
+              }
+              removeLink={(linkName: string) => {
+                setFormData({
+                  ...formData,
+                  links: formData.links.filter(
+                    (link: any) => link.title !== linkName // here
+                  ),
+                });
+              }}
+              setHeading={(head: string) => {
+                setFormData({ ...formData, heading: head });
+              }}
+              // handleImageUpload={(e: any) => {
+              //   e.preventDefault();
+              //   handleUpload(e);
+              // }}
+              handleSave={handleSave}
+            />
+          </div>
         </div>
       ) : (
         <h2>not signed in</h2>
       )}
+      <Footer />
     </div>
   );
 }

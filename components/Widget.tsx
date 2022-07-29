@@ -3,7 +3,7 @@ import { getIcon } from "../lib/getIcon";
 
 export default function WidgetComponent(props: any) {
   return (
-    <div className="w-full xs:w-[22rem] rounded-2xl shadow-2xl p-6">
+    <div className="w-full xs:w-[22rem] h-1/2 rounded-2xl p-6 bg-gray-100 overflow-y-hidden">
       <section className="flex w-full flex-col items-center divide-y divide-gray-500 gap-4">
         <div className="flex flex-col justify-center items-center w-full">
           <img
@@ -25,7 +25,7 @@ export default function WidgetComponent(props: any) {
               className="flex justify-center items-center p-2 rounded-lg pl-6 shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-800"
             >
               <a
-                className="w-full h-full text-center flex justify-center items-center gap-2"
+                className="w-full h-full text-center flex justify-start items-center gap-4"
                 href={link?.url}
               >
                 {/**@ts-ignore**/}
@@ -37,7 +37,15 @@ export default function WidgetComponent(props: any) {
         </div>
         <div className="w-full pt-6 grid grid-cols-1 gap-2 text-center">
           <h2 className="text-xs text-gray-700">
-            made with {`<3`} using ponsor
+            made with {`<3`} using{" "}
+            <a
+              className="text-rose-700"
+              href="https://ponsor.vercel.app"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              ponsor
+            </a>
           </h2>
         </div>
       </section>
