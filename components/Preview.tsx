@@ -20,7 +20,7 @@ export default memo(function Preview(props: any) {
             className="rounded-full w-20 h-20 shadow-md border-2 border-gray-300"
           ></img>
           <h2 className="text-lg text-gray-800 font-bold">
-            sponsor {props.name}
+            Sponsor {props.name}
           </h2>
           <h2 className="text-xs text-center text-gray-700">
             {props.heading}

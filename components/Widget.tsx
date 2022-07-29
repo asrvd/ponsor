@@ -12,7 +12,7 @@ export default function WidgetComponent(props: any) {
             className="rounded-full w-[6rem] h-[6rem] shadow-md border-2 border-gray-300"
           ></img>
           <h2 className="text-lg text-gray-800 font-bold">
-            sponsor {props?.widget?.name}
+            Sponsor {props?.widget?.name}
           </h2>
           <h2 className="text-sm text-center text-gray-700">
             {props?.widget?.heading}

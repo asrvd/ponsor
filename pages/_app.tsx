@@ -15,6 +15,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   Router.events.on("routeChangeError", () => NProgress.done());
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>ponsor</title>
+        <link rel="icon" href="https://favmoji.asheeshh.ga/🎁"></link>
+      </Head>
       <Component {...pageProps} />
       <Toaster />
     </SessionProvider>
