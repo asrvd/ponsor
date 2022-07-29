@@ -93,7 +93,7 @@ const Home: NextPage = () => {
       <Footer />
       <Script
         strategy="afterInteractive"
-        src="http://localhost:3000/scripts/embed.min.js"
+        src="https://ponsor.vercel.app/scripts/embed.min.js"
         data-widget-id="cl5s4kjb30010zwufuqoskws9"
       />
     </div>
