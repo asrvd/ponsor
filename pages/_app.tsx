@@ -17,7 +17,24 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     <SessionProvider session={session}>
       <Head>
         <title>ponsor</title>
-        <link rel="icon" href="https://favmoji.asheeshh.ga/🎁"></link>
+        <link rel="icon" href="https://favmoji.asheeshh.ga/💸"></link>
+        <meta
+          property="og:image"
+          content="https://i.imgur.com/RlEInLS.png"
+        ></meta>
+        <meta property="og:title" content="ponsor"></meta>
+        <meta
+          property="og:description"
+          content="💸 getting sponsored made easy!"
+        ></meta>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="theme-color" content="#22d3ee" />
+        <meta name="twitter:title" content="ponsor" />
+        <meta
+          name="twitter:description"
+          content="💸 getting sponsored made easy!"
+        />
+        <meta name="twitter:image" content="https://i.imgur.com/RlEInLS.png" />
       </Head>
       <Component {...pageProps} />
       <Toaster />
