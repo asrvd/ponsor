@@ -173,6 +173,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                     e.preventDefault();
                     props.handleSave();
                   } else {
+                    e.preventDefault();
                     toast.error("Please add atleast one link");
                   }
                 }}
