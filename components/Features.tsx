@@ -36,7 +36,7 @@ export default function Features(props: FeatureProps) {
               <FiSave /> Auth Support
             </h2>
             <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              login with githu or google to never lose your widget.
+              login with github or google to never lose your widget.
             </p>
           </div>
           <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
