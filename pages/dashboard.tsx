@@ -175,10 +175,6 @@ export default function Dashboard(props: DashboardProps) {
               setHeading={(head: string) => {
                 setFormData({ ...formData, heading: head });
               }}
-              // handleImageUpload={(e: any) => {
-              //   e.preventDefault();
-              //   handleUpload(e);
-              // }}
               handleSave={handleSave}
             />
           </div>

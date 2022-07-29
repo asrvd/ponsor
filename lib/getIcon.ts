@@ -8,7 +8,14 @@ import {
   SiPaypal,
 } from "react-icons/si";
 
-type Slug = "patreon" | "githubsponsor" | "kofi" | "buymeacoffee" | "opencollective" | "liberapay" | "paypal";
+type Slug =
+  | "patreon"
+  | "githubsponsor"
+  | "kofi"
+  | "buymeacoffee"
+  | "opencollective"
+  | "liberapay"
+  | "paypal";
 
 const slugToIcon = {
   patreon: SiPatreon,

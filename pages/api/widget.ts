@@ -34,7 +34,7 @@ export default async function handler(
               avatar,
               links: {
                 create: links,
-              }
+              },
             },
             update: {
               name,
@@ -43,9 +43,9 @@ export default async function handler(
               links: {
                 deleteMany: {},
                 create: links,
-              }
-            }
-          }
+              },
+            },
+          },
         },
       },
     });

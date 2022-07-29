@@ -27,7 +27,10 @@ const Home: NextPage = () => {
             use widgets in your websites to let people find a way to support
             your work!
           </p>
-          <button className="mt-12 px-6 py-2 text-rose-200 font-semibold text-xl focus:ring-2 ring-rose-400 bg-rose-500 rounded shaodw-2xl hover:-translate-y-1 duration-500 flex justiy-center items-center gap-4" onClick={() => router.push('/dashboard')}>
+          <button
+            className="mt-12 px-6 py-2 text-rose-200 font-semibold text-xl focus:ring-2 ring-rose-400 bg-rose-500 rounded shaodw-2xl hover:-translate-y-1 duration-500 flex justiy-center items-center gap-4"
+            onClick={() => router.push("/dashboard")}
+          >
             Get Started <FiArrowRight />
           </button>
           <p className="animate-bounce text-lg text-gray-300 mt-20 rounded-full p-3 bg-gray-800">
@@ -35,15 +38,19 @@ const Home: NextPage = () => {
           </p>
         </div>
         <div className="h-[500px] bg-gray-800 rounded-lg px-10 py-10 w-full lg:w-2/3 flex flex-col justify-center items-center">
-          <iframe className="self-center" height="100%" src="http://localhost:3000/widget/panel/cl5s4kjb30010zwufuqoskws9"></iframe>
+          <iframe
+            className="self-center"
+            height="100%"
+            src="http://localhost:3000/widget/panel/cl5s4kjb30010zwufuqoskws9"
+          ></iframe>
         </div>
         <Features showButton={true} />
         <Footer />
-        <Script
+        {/* <Script
           strategy="afterInteractive"
           src="http://localhost:3000/scripts/embed.min.js"
           data-widget-id="cl5s4kjb30010zwufuqoskws9"
-        />
+        /> */}
       </div>
     );
   }
@@ -74,6 +81,13 @@ const Home: NextPage = () => {
         <p className="animate-bounce text-lg text-gray-300 mt-20 rounded-full p-3 bg-gray-800">
           <FiArrowDown />
         </p>
+      </div>
+      <div className="h-[500px] bg-gray-800 rounded-lg px-10 py-10 w-full lg:w-2/3 flex flex-col justify-center items-center">
+        <iframe
+          className="self-center"
+          height="100%"
+          src="http://localhost:3000/widget/panel/cl5s4kjb30010zwufuqoskws9"
+        ></iframe>
       </div>
       <Features showButton={false} />
       <Footer />
