@@ -106,9 +106,16 @@ export default function Dashboard(props: DashboardProps) {
       {session?.user ? (
         <div className="flex flex-col min-h-screen lg:w-2/3 w-full gap-3">
           <div className="w-full max-h-[10%]">
-            <Header image={session?.user.image} name={session?.user.name} />
+            <Header
+              image={
+                props?.widget?.avatar
+                  ? props?.widget?.avatar
+                  : session?.user?.image
+              }
+              name={session?.user.name}
+            />
           </div>
-          <div className="flex w-full h-full gap-2 items-center justify-center flex-col md:flex-col lg:flex-row p-0 lg:py-20 lg:px-10">
+          <div className="flex w-full h-full gap-2  flex-col md:flex-col lg:flex-row p-0 lg:py-20 lg:px-10">
             <Preview
               av={
                 props?.widget?.avatar

@@ -34,7 +34,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
   const [currentLink, setCurrentLink] = useState<string>("");
 
   return (
-    <div className="relative flex flex-col justify-center items-center w-full lg:w-[60%] max-h-max p-3">
+    <div className="relative flex flex-col justify-center items-center w-full lg:w-[60%] max-h-max">
       <div className="w-[90%] lg:w-full md:w-[75%] bg-gray-800 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 gap-6">
         <form className="flex flex-col gap-3">
           <div className="flex flex-col gap-1">

@@ -4,8 +4,8 @@ import { memo } from "react";
 
 export default memo(function Preview(props: any) {
   return (
-    <div className="flex flex-col justify-center items-center w-full lg:w-[35%] max-h-max p-3">
-      <div className="w-[90%] lg:w-full md:w-[45%] bg-gray-200 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3 lg:py-[3.8rem] gap-6">
+    <div className="flex flex-col justify-center items-center lg:w-[35%] w-full max-h-max">
+      <div className="w-[90%] lg:w-full md:w-[45%] bg-gray-200 rounded divide-y divide-gray-500 h-full grid grid-cols-1 p-3  gap-6">
         <div className="flex flex-col justify-center items-center w-full">
           <img
             alt="avatar"
