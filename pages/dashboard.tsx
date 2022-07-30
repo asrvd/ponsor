@@ -1,4 +1,4 @@
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import type { Session } from "next-auth";
 import { GetServerSideProps } from "next";
 import Header from "../components/Header";
@@ -7,39 +7,19 @@ import PonsorForm from "../components/Form";
 import { useState } from "react";
 import axios from "axios";
 import { PrismaClient } from "@prisma/client";
-import type { Widget, Link } from "@prisma/client";
 import { getIcon } from "../lib/getIcon";
 import toast from "react-hot-toast";
 import Footer from "../components/Footer";
+import type { FormData, DashboardProps, Slug } from "../lib/types";
 
 const prisma = new PrismaClient();
-
-type FormData = {
-  image?: string;
-  rawImage?: any;
-  previewImage?: any;
-  heading?: string;
-  links: any[];
-};
-
-type DashboardProps = {
-  session?: Session;
-  widget?: Widget;
-  links?: Link[];
-};
-
-type Slug =
-  | "patreon"
-  | "githubsponsor"
-  | "kofi"
-  | "buymeacoffee"
-  | "opencollective"
-  | "liberapay"
-  | "paypal";
 
 export default function Dashboard(props: DashboardProps) {
   const { data: session, status } = useSession();
   const [formData, setFormData] = useState<FormData>({
+    name: props?.widget?.name
+      ? props?.widget?.name
+      : (session?.user?.name as string),
     image: props?.widget?.avatar
       ? props?.widget?.avatar
       : (session?.user?.image as string),
@@ -72,7 +52,7 @@ export default function Dashboard(props: DashboardProps) {
     let toastId = toast.loading("Saving...");
 
     const res = await axios.post("/api/widget", {
-      name: session?.user.name,
+      name: formData.name,
       heading: formData.heading,
       avatar: imageURL !== null ? imageURL : formData.image,
       links: formData.links.map((link) => {
@@ -135,9 +115,7 @@ export default function Dashboard(props: DashboardProps) {
                   ? props?.widget?.avatar
                   : session?.user.image
               }
-              name={
-                props?.widget?.name ? props?.widget?.name : session?.user.name
-              }
+              name={formData.name}
               uploadedAv={formData.previewImage}
               links={formData.links}
               heading={formData.heading}
@@ -174,6 +152,9 @@ export default function Dashboard(props: DashboardProps) {
               }}
               setHeading={(head: string) => {
                 setFormData({ ...formData, heading: head });
+              }}
+              setName={(name: string) => {
+                setFormData({ ...formData, name: name });
               }}
               handleSave={handleSave}
             />

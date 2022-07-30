@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { getIcon } from "../lib/getIcon";
+import type { WidgetProps } from "../lib/types";
 
-export default function WidgetComponent(props: any) {
+export default function WidgetComponent(props: WidgetProps) {
   return (
     <div className="w-full xs:w-[22rem] h-1/2 rounded-2xl p-6 bg-gray-100 overflow-y-hidden">
       <section className="flex w-full flex-col items-center divide-y divide-gray-500 gap-4">

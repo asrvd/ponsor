@@ -1,16 +1,15 @@
-import {
-  FiPenTool,
-  FiSave,
-  FiHeart,
-  FiSliders,
-  FiSmile,
-  FiCopy,
-  FiArrowRight,
-} from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { useRouter } from "next/router";
+import { features } from "../lib/constants";
 
 type FeatureProps = {
   showButton?: boolean;
+};
+
+type Feature = {
+  title: string;
+  description: string;
+  icon: any;
 };
 
 export default function Features(props: FeatureProps) {
@@ -22,58 +21,23 @@ export default function Features(props: FeatureProps) {
         Features
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4 py-6">
-        <>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold text-lg lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiPenTool /> Clean Widgets
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              easy to make clean and beautiful widgets.
-            </p>
-          </div>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiSave /> Auth Support
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              login with github or google to never lose your widget.
-            </p>
-          </div>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiSliders /> Customisable
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              add upto 7 different sponsor methods to your widget.
-            </p>
-          </div>
-        </>
-        <>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiCopy /> Embed Anywhere
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              embed your widget on any site using script tags.
-            </p>
-          </div>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiSmile /> Easy to Use
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              creating the widget is as easy as filling a form.
-            </p>
-          </div>
-          <div className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4">
-            <h2 className="text-gray-200 font-semibold lg:text-2xl md:text-xl flex gap-2 items-center">
-              <FiHeart /> Free Forever
-            </h2>
-            <p className="text-gray-300 text-sm lg:text-base md:text-base">
-              ponsor is a completely free to use tool.
-            </p>
-          </div>
-        </>
+        {features.map((feature) => (
+          <>
+            {feature.map((f: Feature) => (
+              <div
+                className="text-left gap-3 flex flex-col bg-gray-800 rounded shadow-2xl p-4"
+                key={f.title}
+              >
+                <h2 className="text-gray-200 font-semibold text-lg lg:text-2xl md:text-xl flex gap-2 items-center">
+                  {f.icon()} {f.title}
+                </h2>
+                <p className="text-gray-300 text-sm lg:text-base md:text-base">
+                  {f.description}
+                </p>
+              </div>
+            ))}
+          </>
+        ))}
       </div>
       {props.showButton && (
         <button

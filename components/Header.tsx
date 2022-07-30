@@ -1,15 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
+
 import { useState, useRef, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FiHome, FiLogOut, FiSliders } from "react-icons/fi";
 import { memo } from "react";
-
-interface HeaderProps {
-  name: string | any;
-  image: string | any;
-}
+import type { HeaderProps } from "../lib/types";
 
 export default memo(function Header(props: HeaderProps) {
   const router = useRouter();

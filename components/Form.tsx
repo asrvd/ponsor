@@ -1,13 +1,4 @@
 import {
-  SiPatreon,
-  SiGithubsponsors,
-  SiKofi,
-  SiBuymeacoffee,
-  SiOpencollective,
-  SiLiberapay,
-  SiPaypal,
-} from "react-icons/si";
-import {
   FiPlus,
   FiX,
   FiSave,
@@ -15,74 +6,13 @@ import {
   FiCopy,
   FiCheck,
 } from "react-icons/fi";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { isURL } from "../lib/isURL";
 import toast from "react-hot-toast";
-import type { Widget } from "@prisma/client";
 import { getIcon } from "../lib/getIcon";
 import { memo } from "react";
-
-export interface Inputs {
-  heading: string;
-  image: string;
-}
-
-export const sponsorLinks = [
-  {
-    name: "GitHub Sponsor",
-    icon: SiGithubsponsors,
-  },
-  {
-    name: "Buy me a coffee",
-    icon: SiBuymeacoffee,
-  },
-  {
-    name: "Kofi",
-    icon: SiKofi,
-  },
-  {
-    name: "Patreon",
-    icon: SiPatreon,
-  },
-  {
-    name: "Open Collective",
-    icon: SiOpencollective,
-  },
-  {
-    name: "Liberapay",
-    icon: SiLiberapay,
-  },
-  {
-    name: "PayPal",
-    icon: SiPaypal,
-  },
-];
-
-type Link = {
-  url: string;
-  title: string;
-  type: string;
-  icon: any;
-};
-
-type FormProps = {
-  widget?: Widget;
-  links?: Link[];
-  uploadImage: (e: any) => void;
-  addLink: (link: Link) => void;
-  removeLink: (linkName: string) => void;
-  setHeading: (head: string) => void;
-  handleSave: () => void;
-};
-
-type Slug =
-  | "patreon"
-  | "githubsponsor"
-  | "kofi"
-  | "buymeacoffee"
-  | "opencollective"
-  | "liberapay"
-  | "paypal";
+import type { FormProps, DerivedLink, Slug } from "../lib/types";
+import { sponsorLinks } from "../lib/constants";
 
 export default memo(function PonsorForm({ ...props }: FormProps) {
   const [hasMadeChanges, setHasMadeChanges] = useState(false);
@@ -90,7 +20,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
   const [addedLinkTypes, setAddedLinkTypes] = useState<string[]>(
     props?.links?.map((link) => link.title) || []
   );
-  const [addedLinks, setAddedLinks] = useState<Link[]>(
+  const [addedLinks, setAddedLinks] = useState<DerivedLink[]>(
     props?.links?.map((link) => {
       return {
         url: link.url,
@@ -118,6 +48,23 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
                 e.preventDefault();
                 setHasMadeChanges(true);
                 props.uploadImage(e);
+              }}
+            ></input>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="image" className="text-gray-200 text-xs">
+              add name
+            </label>
+            <input
+              type="text"
+              className="outline-none focus:outline-none rounded bg-transparent text-gray-300 text-md border-2 border-gray-500 p-1"
+              placeholder={props?.widget?.name}
+              onChange={(e) => {
+                e.preventDefault();
+                if (e.target.value !== props?.widget?.heading) {
+                  setHasMadeChanges(true);
+                }
+                props.setName(e.target.value);
               }}
             ></input>
           </div>
@@ -284,7 +231,7 @@ export default memo(function PonsorForm({ ...props }: FormProps) {
               <a
                 className="flex justify-left items-center p-2 rounded shadow-md hover:shadow-xl hover:-translate-y-[0.15rem] text-gray-300 cursor-pointer duration-300 bg-gray-700 w-full gap-4"
                 href={link?.url}
-                target={'_blank'}
+                target={"_blank"}
                 rel="noreferrer"
               >
                 {link?.icon()}

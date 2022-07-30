@@ -6,16 +6,9 @@ import {
   SiOpencollective,
   SiLiberapay,
   SiPaypal,
+  SiGumroad
 } from "react-icons/si";
-
-type Slug =
-  | "patreon"
-  | "githubsponsor"
-  | "kofi"
-  | "buymeacoffee"
-  | "opencollective"
-  | "liberapay"
-  | "paypal";
+import type { Slug } from "./types";
 
 const slugToIcon = {
   patreon: SiPatreon,
@@ -25,6 +18,7 @@ const slugToIcon = {
   opencollective: SiOpencollective,
   liberapay: SiLiberapay,
   paypal: SiPaypal,
+  gumroad: SiGumroad
 };
 
 export function getIcon(slug: Slug) {

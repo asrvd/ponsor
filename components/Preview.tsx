@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+
 import { memo } from "react";
 
 export default memo(function Preview(props: any) {
